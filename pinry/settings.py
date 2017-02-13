@@ -23,12 +23,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'taggit',
+    'rest_framework',
     'compressor',
-    'django_images',
     'pinry.core',
-    'pinry.users',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticatedOrReadOnly',],
+    'PAGE_SIZE': 50,
+    'URL_FIELD_NAME': 'api_url',
+}
 
 ROOT_URLCONF = 'pinry.urls'
 
@@ -39,7 +43,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'pinry.users.middleware.Public',
 ]
 
 TEMPLATES = [
@@ -53,7 +56,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'pinry.core.context_processors.template_settings',
             ],
         },
     },
@@ -105,30 +107,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
 MEDIA_URL = '/static/media/'
 
-# Set to False to disable people from creating new accounts.
-ALLOW_NEW_REGISTRATIONS = True
-
-# Set to False to force users to login before seeing any pins.
-PUBLIC = True
-
 AUTHENTICATION_BACKENDS = [
-    'pinry.users.auth.backends.CombinedAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -143,12 +133,3 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
 }
 
-API_LIMIT_PER_PAGE = 50
-
-IMAGE_PATH = 'pinry.core.utils.upload_path'
-
-IMAGE_SIZES = {
-    'thumbnail': {'size': [240, 0]},
-    'standard': {'size': [600, 0]},
-    'square': {'crop': True, 'size': [125, 125]},
-}

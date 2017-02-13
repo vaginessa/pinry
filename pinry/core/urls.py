@@ -1,31 +1,26 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
 
-from tastypie.api import Api
+from rest_framework import routers
 
-from .api import ImageResource, ThumbnailResource, PinResource, UserResource
-from .views import CreateImage
+from .views import UserViewSet
+from .views import TagViewSet
+from .views import PinViewSet
 
 
-v1_api = Api(api_name='v1')
-v1_api.register(ImageResource())
-v1_api.register(ThumbnailResource())
-v1_api.register(PinResource())
-v1_api.register(UserResource())
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'tags', TagViewSet)
+router.register(r'pins', PinViewSet)
 
-urlpatterns = patterns('',
-    url(r'^api/', include(v1_api.urls, namespace='api')),
 
-    url(r'^pins/pin-form/$', TemplateView.as_view(template_name='core/pin_form.html'),
-        name='pin-form'),
-    url(r'^pins/create-image/$', CreateImage.as_view(), name='create-image'),
+urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='recent-pins'),
 
-    url(r'^pins/tag/(?P<tag>(\w|-)+)/$', TemplateView.as_view(template_name='core/pins.html'),
-        name='tag-pins'),
-    url(r'^pins/user/(?P<user>(\w|-)+)/$', TemplateView.as_view(template_name='core/pins.html'),
-        name='user-pins'),
-    url(r'^(?P<pin>[0-9]+)/$', TemplateView.as_view(template_name='core/pins.html'),
-        name='recent-pins'),
-    url(r'^$', TemplateView.as_view(template_name='core/pins.html'),
-        name='recent-pins'),
-)
+    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='login'),
+    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='logout'),
+    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='register'),
+
+    url(r'^api/', include(router.urls, namespace='api')),
+]
+

@@ -60,11 +60,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                             <li><a onclick="pinForm()">New Pin</a></li>
-                            <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                            <li><a href="{% url 'core:logout' %}">Logout</a></li>
                             <li>{% include "includes/bookmarklet_link.html" %}</li>
                         {% else %}
-                            <li><a href="{% url 'users:login' %}">Login</a></li>
-                            <li><a href="{% url 'users:register' %}">Register</a></li>
+                            <li><a href="{% url 'core:login' %}">Login</a></li>
+                            <li><a href="{% url 'core:register' %}">Register</a></li>
                         {% endif %}
                     </ul>
                 </div>

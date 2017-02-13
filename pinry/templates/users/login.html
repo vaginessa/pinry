@@ -8,7 +8,7 @@
             <div id="form" class="col-sm-4 col-sm-offset-4">
                 <h1>Login</h1>
                 <h3>We've missed you! Check out what's new.</h3>
-                <form action="{% url "users:login" %}" method="post" class="form-horizontal">
+                <form action="{% url "core:login" %}" method="post" class="form-horizontal">
                     {% csrf_token %}
                     {% for field in form %}
                         {% include "includes/field.html" %}
