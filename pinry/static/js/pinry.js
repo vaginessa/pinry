@@ -112,21 +112,18 @@ $(window).load(function() {
         $('.spinner').css('display', 'block');
 
         // Fetch our pins from the api using our current offset
-        var apiUrl = '/api/v1/pin/?format=json&order_by=-id&offset='+String(offset);
+        var apiUrl = '/api/pins/?format=json&order_by=-id&offset='+String(offset);
         if (tagFilter) apiUrl = apiUrl + '&tag=' + tagFilter;
         if (userFilter) apiUrl = apiUrl + '&submitter__username=' + userFilter;
         $.get(apiUrl, function(pins) {
             // Set which items are editable by the current user
-            for (var i=0; i < pins.objects.length; i++) {
-                pins.objects[i].editable = (pins.objects[i].submitter.username == currentUser.username);
-                pins.objects[i].tags.sort(function (a, b) {
-                    return a.toLowerCase().localeCompare(b.toLowerCase());
-                });
+            for (var i=0; i < pins.results.length; i++) {
+                pins.results[i].editable = (pins.results[i].user.username == currentUser.username);
             }
 
             // Use the fetched pins as our context for our pins template
             var template = Handlebars.compile($('#pins-template').html());
-            var html = template({pins: pins.objects});
+            var html = template({pins: pins.results});
 
             // Append the newly compiled data to our container
             $('#pins').append(html);
@@ -140,7 +137,7 @@ $(window).load(function() {
                 });
             });
 
-            if (pins.objects.length < apiLimitPerPage) {
+            if (pins.results.length < 50) {
                 $('.spinner').css('display', 'none');
                 if ($('#pins').length !== 0) {
                     var theEnd = document.createElement('div');
@@ -155,7 +152,7 @@ $(window).load(function() {
         });
 
         // Up our offset, it's currently defined as 50 in our settings
-        offset += apiLimitPerPage;
+        offset += 50;
     }
 
 

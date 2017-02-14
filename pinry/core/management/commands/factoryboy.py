@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 from faker import Factory
 
-from piney.core.models import Tag
-from piney.core.models import Pin
+from pinry.core.models import Tag
+from pinry.core.models import Pin
 
 
 class Command(BaseCommand):

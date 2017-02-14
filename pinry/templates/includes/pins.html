@@ -17,8 +17,8 @@
                     <img src="{{image.thumbnail.image}}" width="{{image.thumbnail.width}}" height="{{image.thumbnail.height}}"/>
                 </div>
             </a>
-            {{#if description}}
-                <p>{{niceLinks description}}</p>
+            {{#if title}}
+                <p>{{niceLinks title}}</p>
             {{/if}}
             <div class="pin-footer clearfix">
                 <div class="avatar pull-left">
@@ -30,7 +30,7 @@
                     {{#if tags}}
                         <span class="dim">in</span>
                     {{#each tags}}
-                        <span class="tag"><a href="/pins/tag/{{this}}/">{{this}}</a></span>
+                        <span class="tag"><a href="/pins/tag/{{this.id}}/">{{this.title}}</a></span>
                     {{/each}}
                     {{/if}}
                 </div>
