@@ -112,7 +112,7 @@ $(window).load(function() {
         $('.spinner').css('display', 'block');
 
         // Fetch our pins from the api using our current offset
-        var apiUrl = '/api/pins/?format=json&order_by=-id&offset='+String(offset);
+        var apiUrl = '/api/pins/?format=json&order_by=-id&page='+String(page);
         if (tagFilter) apiUrl = apiUrl + '&tag=' + tagFilter;
         if (userFilter) apiUrl = apiUrl + '&submitter__username=' + userFilter;
         $.get(apiUrl, function(pins) {
@@ -152,12 +152,12 @@ $(window).load(function() {
         });
 
         // Up our offset, it's currently defined as 50 in our settings
-        offset += 50;
+        page += 1;
     }
 
 
     // Set offset for loadPins and do our initial load
-    var offset = 0;
+    var page = 1;
     loadPins();
 
     // If our window gets resized keep the tiles looking clean and in our window
