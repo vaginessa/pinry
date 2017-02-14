@@ -1,14 +1,17 @@
+# core
 Django==1.10.3
-django-appconf==1.0.2
-django-compressor==2.1
 djangorestframework==3.5.3
-fake-factory==0.7.2
-gunicorn==19.6.0
-ipaddress==1.0.17
+
+# files
 Pillow==3.4.2
-pkg-resources==0.0.0
-python-dateutil==2.6.0
-rcssmin==1.0.6
+django-compressor==2.1
+
+# server
+gunicorn==19.6.0
+
+# extra
 requests==2.11.1
-rjsmin==1.0.12
-six==1.10.0
+
+# testing
+fake-factory==0.7.2
+
