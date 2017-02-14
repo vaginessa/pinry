@@ -1,11 +1,11 @@
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django.contrib.auth.views import login, logout
 
 from rest_framework import routers
 
-from .views import UserViewSet
-from .views import TagViewSet
-from .views import PinViewSet
+from .views import UserViewSet, TagViewSet, PinViewSet
+from .views import login_view
 
 
 router = routers.DefaultRouter()
@@ -17,8 +17,8 @@ router.register(r'pins', PinViewSet)
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='recent-pins'),
 
-    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='login'),
-    url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='logout'),
+    url(r'^login/$', login, {'template_name': 'users/login.html'}, name='login'),
+    url(r'^logout/$', logout, name='logout'),
     url(r'^$', TemplateView.as_view(template_name='core/pins.html'), name='register'),
 
     url(r'^api/', include(router.urls, namespace='api')),

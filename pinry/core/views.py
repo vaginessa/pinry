@@ -1,16 +1,15 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
+from django.template.response import TemplateResponse
 
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 
-from .models import Tag
-from .models import Pin
-from .serializers import UserSerializer
-from .serializers import TagSerializer
-from .serializers import PinSerializer
-from .permissions import IsUserOrReadOnly
-from .permissions import IsAdminOrReadOnly
+from .models import Tag, Pin
+from .serializers import UserSerializer, TagSerializer, PinSerializer
+from .permissions import IsUserOrReadOnly, IsAdminOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -45,4 +44,17 @@ class PinViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+def login_view(request):
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('core:recent-pins')
+        else:
+            messages.add_message(request, messages.WARN, 'Your username or password was incorrect.')
+    return TemplateResponse(request, 'users/login.html')
 
