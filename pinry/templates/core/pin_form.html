@@ -3,5 +3,12 @@
 {% block title %}Pin Form{% endblock %}
 
 {% block yield %}
-    <div id="display-pin-form"></div>
+<div class="container">
+    <div class="col-xs-12">
+        <form method="POST">
+            {{ form.as_ul }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
