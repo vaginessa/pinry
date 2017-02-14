@@ -40,7 +40,7 @@ class PinViewSet(viewsets.ModelViewSet):
         tagid = self.request.query_params.get('tagid', None)
         if tagid is not None:
             queryset = queryset.filter(tags__id=tagid)
-        return queryset
+        return queryset.select_subclasses()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

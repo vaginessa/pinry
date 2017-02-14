@@ -10,6 +10,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
+from model_utils.managers import InheritanceManager
+
 
 class Tag(models.Model):
     """
@@ -44,6 +46,8 @@ class Pin(models.Model):
     Elements we want every pin to have, all other pins extend this
     model.
     """
+    objects = InheritanceManager()
+
     title = models.CharField(max_length=200)
     url = models.URLField() # NOTE: defaults to max_length=200, may need more
     tags = models.ManyToManyField(Tag, related_name='pins')
@@ -93,10 +97,33 @@ class Pin(models.Model):
         """
         return '{0.netloc}'.format(urlparse(self.url))
 
-    def get_image_url(self):
+    def get_image(self):
         """
         All pins should implement this function, the default pin does
         not have an image attached to it but almost all pins should.
+
+        The default return value should be a dictionary::
+
+            return {
+                'url': 'http://example.com/image.jpg',
+                'width': 300,
+                'height': 450,
+            }
+        """
+        return None
+
+    def get_thumbnail(self):
+        """
+        All pins should implement this function, the default pin does
+        not have an image attached to it but almost all pins should.
+
+        The default return value should be a dictionary::
+
+            return {
+                'url': 'http://example.com/image.jpg',
+                'width': 300,
+                'height': 450,
+            }
         """
         return None
 

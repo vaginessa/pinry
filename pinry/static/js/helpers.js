@@ -27,19 +27,19 @@ function cleanTags(tags) {
 
 
 function getImageData(imageId) {
-    var apiUrl = '/api/v1/image/'+imageId+'/?format=json';
+    var apiUrl = '/api/pins/'+imageId+'/?format=json';
     return $.get(apiUrl);
 }
 
 
 function getPinData(pinId) {
-    var apiUrl = '/api/v1/pin/'+pinId+'/?format=json';
+    var apiUrl = '/api/pins/'+pinId+'/?format=json';
     return $.get(apiUrl);
 }
 
 
 function deletePinData(pinId) {
-    var apiUrl = '/api/v1/pin/'+pinId+'/?format=json';
+    var apiUrl = '/api/pins/'+pinId+'/?format=json';
     return $.ajax(apiUrl, {
         type: 'DELETE'
     });
@@ -48,7 +48,7 @@ function deletePinData(pinId) {
 function postPinData(data) {
     return $.ajax({
         type: "post",
-        url: "/api/v1/pin/",
+        url: "/api/pins/",
         contentType: 'application/json',
         data: JSON.stringify(data)
     });

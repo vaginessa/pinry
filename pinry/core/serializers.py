@@ -36,5 +36,5 @@ class PinSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pin
-        fields = ['api_url', 'id', 'title', 'url', 'get_url_domain', 'tags', 'user']
+        fields = ['api_url', 'id', 'title', 'url', 'get_url_domain', 'tags', 'user', 'get_image', 'get_thumbnail']
 

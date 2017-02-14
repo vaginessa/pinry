@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'compressor',
     'pinry.core',
+    'pinry.contrib',
 ]
 
 REST_FRAMEWORK = {
