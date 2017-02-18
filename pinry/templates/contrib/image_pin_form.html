@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Pin Form{% endblock %}
+
+{% block yield %}
+<div class="container">
+    <div class="col-xs-12">
+        <form method="POST" class="pin-form" enctype="multipart/form-data">
+            <ul>
+                {{ form.as_ul }}
+                <li><button class="btn btn-default" type="submit">Submit</button></li>
+            </ul>
+        </form>
+    </div>
+</div>
+{% endblock %}
