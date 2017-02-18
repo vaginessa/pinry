@@ -5,9 +5,11 @@
 {% block yield %}
 <div class="container">
     <div class="col-xs-12">
-        <form method="POST">
-            {{ form.as_ul }}
-            <button type="submit">Submit</button>
+        <form method="POST" class="pin-form">
+            <ul>
+                {{ form.as_ul }}
+                <li><button class="btn btn-default" type="submit">Submit</button></li>
+            </ul>
         </form>
     </div>
 </div>

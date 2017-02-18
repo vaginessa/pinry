@@ -169,6 +169,31 @@ textarea {
 .modal-body {
     overflow: hidden;
 }
+
+.pin-form ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pin-form li {
+    padding: 5px 0;
+}
+
+.pin-form label {
+    display: block;
+}
+
+.pin-form input {
+    padding: 5px;
+}
+
+.pin-form input, .pin-form select {
+    border-radius: 3px;
+    border: 1px solid #aaa;
+    box-shadow: none;
+    width: 100%;
+}
 /* End Forms */
 
 
